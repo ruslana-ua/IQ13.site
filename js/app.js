@@ -4365,7 +4365,7 @@
                 },
                 mousewheel: {
                     enabled: true,
-                    sensitivity: .2,
+                    sensitivity: .3,
                     forceToAxis: true
                 },
                 navigation: {
@@ -4576,14 +4576,12 @@
                     dropDownList.classList.add("visible");
                     this.classList.add("active");
                     this.parentElement.classList.add("active");
-                    document.documentElement.classList.add("in");
                 }));
                 dropdown.addEventListener("mouseout", (event => {
                     if (!dropdown.contains(event.relatedTarget)) if (dropDownList.classList.contains("visible")) {
                         dropDownList.classList.remove("visible");
                         dropDownBtn.classList.remove("active");
                         dropDownBtn.parentElement.classList.remove("active");
-                        document.documentElement.classList.remove("in");
                     }
                 }));
             }));
