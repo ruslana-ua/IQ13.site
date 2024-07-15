@@ -4629,6 +4629,24 @@
                         navigation: {
                             prevEl: ".swiper-button-prev",
                             nextEl: ".swiper-button-next"
+                        },
+                        on: {
+                            init: function(swiper) {
+                                const allSlides = document.querySelector(".fraction__all--reviews");
+                                const allSlidesItems = document.querySelectorAll(".reviews__slide:not(.swiper-slide-duplicate)");
+                                const totalSlides = allSlidesItems.length;
+                                allSlides.innerHTML = totalSlides < 10 ? "0" + totalSlides : totalSlides;
+                            },
+                            slideChange: function(swiper) {
+                                const currentSlide = document.querySelector(".fraction__current--reviews");
+                                const currentIndex = swiper.realIndex + 1;
+                                currentSlide.innerHTML = currentIndex < 10 ? "0" + currentIndex : currentIndex;
+                            },
+                            transitionEnd: function(swiper) {
+                                const currentSlide = document.querySelector(".fraction__current--reviews");
+                                const currentIndex = swiper.realIndex + 1;
+                                currentSlide.innerHTML = currentIndex < 10 ? "0" + currentIndex : currentIndex;
+                            }
                         }
                     };
                     if (windowWidth >= 768) {
