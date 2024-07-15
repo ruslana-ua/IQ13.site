@@ -4538,7 +4538,7 @@
                 on: {}
             });
             if (document.querySelector(".interior__slider")) new swiper_core_Swiper(".interior__slider", {
-                modules: [ Navigation, EffectCoverflow, Mousewheel, freeMode ],
+                modules: [ Navigation, EffectCoverflow ],
                 observer: true,
                 observeParents: true,
                 speed: 800,
@@ -4556,27 +4556,12 @@
                     modifier: 1,
                     slideShadows: false
                 },
-                freeMode: {
-                    enabled: true,
-                    sticky: false,
-                    momentumBounce: false
-                },
-                mousewheel: {
-                    enabled: true,
-                    sensitivity: .7,
-                    forceToAxis: true
-                },
                 navigation: {
                     prevEl: ".swiper-button-prev",
                     nextEl: ".swiper-button-next"
                 },
                 breakpoints: {
                     0: {
-                        freeMode: {
-                            enabled: true,
-                            sticky: true,
-                            momentumBounce: false
-                        },
                         coverflowEffect: {
                             rotate: 0,
                             stretch: -9,
@@ -4587,11 +4572,6 @@
                         }
                     },
                     768: {
-                        freeMode: {
-                            enabled: true,
-                            sticky: true,
-                            momentumBounce: false
-                        },
                         coverflowEffect: {
                             rotate: 0,
                             stretch: -16,
@@ -4614,23 +4594,60 @@
                 },
                 on: {
                     init: function(swiper) {
-                        const allSlides = document.querySelector(".fraction__all");
+                        const allSlides = document.querySelector(".fraction__all--interior");
                         const allSlidesItems = document.querySelectorAll(".interior__slide:not(.swiper-slide-duplicate)");
                         const totalSlides = allSlidesItems.length;
                         allSlides.innerHTML = totalSlides < 10 ? "0" + totalSlides : totalSlides;
                     },
                     slideChange: function(swiper) {
-                        const currentSlide = document.querySelector(".fraction__current");
+                        const currentSlide = document.querySelector(".fraction__current--interior");
                         const currentIndex = swiper.realIndex + 1;
                         currentSlide.innerHTML = currentIndex < 10 ? "0" + currentIndex : currentIndex;
                     },
                     transitionEnd: function(swiper) {
-                        const currentSlide = document.querySelector(".fraction__current");
+                        const currentSlide = document.querySelector(".fraction__current--interior");
                         const currentIndex = swiper.realIndex + 1;
                         currentSlide.innerHTML = currentIndex < 10 ? "0" + currentIndex : currentIndex;
                     }
                 }
             });
+            if (document.querySelector(".reviews__slider")) {
+                let swiper = null;
+                function initSwiper() {
+                    const windowWidth = window.innerWidth;
+                    if (swiper) swiper.destroy(true, true);
+                    const config = {
+                        modules: [ Navigation ],
+                        observer: true,
+                        observeParents: true,
+                        speed: 800,
+                        loop: true,
+                        grabCursor: true,
+                        centeredSlides: true,
+                        slidesPerView: "auto",
+                        spaceBetween: 9,
+                        navigation: {
+                            prevEl: ".swiper-button-prev",
+                            nextEl: ".swiper-button-next"
+                        }
+                    };
+                    if (windowWidth >= 768) {
+                        config.modules.push(EffectCoverflow);
+                        config.effect = "coverflow";
+                        config.coverflowEffect = {
+                            rotate: 0,
+                            stretch: windowWidth >= 992 ? 320 : 290,
+                            depth: -244,
+                            scale: .325,
+                            modifier: 1,
+                            slideShadows: false
+                        };
+                    }
+                    swiper = new swiper_core_Swiper(".reviews__slider", config);
+                }
+                initSwiper();
+                window.addEventListener("resize", initSwiper);
+            }
         }
         window.addEventListener("DOMContentLoaded", (function(e) {
             initSliders();
@@ -4839,6 +4856,31 @@
                 element.innerText = currentYear;
             }));
         }
+        if (document.querySelectorAll(".reviews__slider").length > 0) document.addEventListener("DOMContentLoaded", (function() {
+            function moveElements() {
+                const reviewSlides = document.querySelectorAll(".reviews__slide");
+                reviewSlides.forEach((slide => {
+                    const dateElement = slide.querySelector(".info-reviews__date");
+                    const mobContainer = slide.querySelector(".info-reviews__mob");
+                    const bottomContainer = slide.querySelector(".info-reviews__bottom");
+                    const labelElement = slide.querySelector(".reviews__label");
+                    const imageWrap = slide.querySelector(".reviews__image--wrap");
+                    const topContainer = slide.querySelector(".info-reviews__top");
+                    const infoContainer = slide.querySelector(".info-reviews");
+                    if (window.innerWidth < 767.98) {
+                        if (dateElement && mobContainer) mobContainer.insertBefore(dateElement, mobContainer.firstChild);
+                        if (labelElement && mobContainer) mobContainer.appendChild(labelElement);
+                        if (topContainer && imageWrap) imageWrap.appendChild(topContainer);
+                    } else {
+                        if (dateElement && bottomContainer) bottomContainer.appendChild(dateElement);
+                        if (labelElement && imageWrap) imageWrap.appendChild(labelElement);
+                        if (topContainer && infoContainer) infoContainer.insertBefore(topContainer, infoContainer.firstChild);
+                    }
+                }));
+            }
+            moveElements();
+            window.addEventListener("resize", moveElements);
+        }));
         window["FLS"] = false;
         isWebp();
         menuInit();
