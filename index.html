@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20240717095430">
+	<link rel="stylesheet" href="css/style.min.css?_v=20240719085011">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -296,7 +296,7 @@
 					<div class="main__wrapper">
 						<div class="main__content">
 							<div class="main__subtitle subtitle-xs">IQ13 Beauty Space</div>
-							<h3 class="main__title">Б’юті-послуги від догляду за шкірою до педикюру та укладання волосся</h3>
+							<h3 data-watch class="main__title anim">Б’юті-послуги від догляду за шкірою до педикюру та укладання волосся</h3>
 							<a href="" class="main__link--btn-pink _icon-arrow-up">
 								<span>Записатись</span>
 								<div class="btn__bg">
@@ -344,7 +344,7 @@
 				<div class="promotions__container">
 					<div class="promotions__top top">
 						<div class="top__subtitle top__subtitle--mod subtitle-xs">Усі послуги в одному салоні</div>
-						<h1 class="top__title">Акції</h1>
+						<h1 data-watch class="top__title anim">Акції</h1>
 						<div class="top__text">
 							<p>Наші спеціальні пропозиції дозволять вам отримати якісні послуги за вигідними цінами, при цьому економлячи ваш час.</p>
 						</div>
@@ -401,8 +401,8 @@
 								</div>
 							</a>
 							<a href="" class="promotions__link promotions__link--mod promotions__link--blue swiper-slide">
-								<div class="promotions__image lazy_image">
-									<img data-src="img/promotions/01.webp" alt="">
+								<div class="promotions__image">
+									<img src="img/promotions/01.webp" alt="">
 								</div>
 								<div class="promotions__label label">
 									<div class="label__tag label__tag--blue _icon-arrow-up">Cosmetology</div>
@@ -480,8 +480,8 @@
 								</div>
 							</a>
 							<a href="" class="promotions__link promotions__link--mod promotions__link--blue swiper-slide">
-								<div class="promotions__image lazy_image">
-									<img data-src="img/promotions/01.webp" alt="">
+								<div class="promotions__image">
+									<img src="img/promotions/01.webp" alt="">
 								</div>
 								<div class="promotions__label label">
 									<div class="label__tag label__tag--blue _icon-arrow-up">Cosmetology</div>
@@ -533,7 +533,7 @@
 				<div class="our-services__container">
 					<div class="our-services__top top">
 						<div class="top__subtitle top__subtitle--mod subtitle-xs">Послуги</div>
-						<h2 class="top__title">Наші послуги</h2>
+						<h2 data-watch class="top__title anim">Наші послуги</h2>
 						<div class="top__text">
 							<p>Наші досвідчені фахівці з радістю нададуть вам високоякісні послуги з макіяжу, догляду за волоссям, нігтями, шкірою та іншими процедурами краси</p>
 						</div>
@@ -568,7 +568,7 @@
 					</div>
 					<div class="block-services__top top">
 						<div class="top__subtitle subtitle-xs">інʼєкційна та доглядова Косметологія</div>
-						<h1 class="top__title">Cosmetology</h1>
+						<h1 data-watch class="top__title anim">Cosmetology</h1>
 						<div class="top__text">
 							<p>01/07</p>
 							<p>Широкий спектр послуг естетичної та інʼєкційної косметології від професійного лікаря-косметолога: догляд, лікування проблемної шкіри, корекція обличчя та тіла, anti-age процедури та інше. </p>
@@ -601,7 +601,7 @@
 					</div>
 					<div class="block-services__top top">
 						<div class="top__subtitle subtitle-xs">Фарбування, стрижки, зачіски, лікування</div>
-						<h1 class="top__title">Hair</h1>
+						<h1 data-watch class="top__title anim">Hair</h1>
 						<div class="top__text">
 							<p>02/07</p>
 							<p>Тут ваш найкращий майстер зробить фарбування волосся будь-якої складності, стильну стрижку, найоб’ємнішу укладку та ще й полікує волосся. </p>
@@ -990,7 +990,6 @@
 					</div>
 				</div>
 			</section>
-			</section>
 			<section class="interior">
 				<div class="interior__container">
 					<div class="interior__body">
@@ -1068,7 +1067,6 @@
 						</div>
 					</div>
 				</div>
-			</section>
 			</section>
 			<section class="social-block">
 				<div class="social-block__container">
@@ -1692,7 +1690,68 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20240717095430"></script>
+	<div id="popup-search" aria-hidden="true" class="popup popup-search">
+		<div class="popup-search__wrapper">
+			<div class="popup__content popup-search__content">
+				<div class="popup-search__main">
+					<div class="popup-search__row">
+						<div class="popup-search__logo">
+							<img src="img/main/logo-dark.svg" alt="IQ13 Beauty Space">
+						</div>
+						<button data-close="" type="button" class="popup-search__close _icon-close"></button>
+					</div>
+					<div class="popup-search__search search">
+						<form action="#" class="search__form">
+							<div class="form__item">
+								<input type="text" name="search" placeholder="Пошук" class="search__input">
+								<button type="submit" class="search__button _icon-search"></button>
+								<button type="button" class="search__clear"></button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="popup-search__tags-block tags-block__body text-l">
+					<a href="" class="tags-block__link tags-block__link--violet">Стрижка</a>
+					<a href="" class="tags-block__link tags-block__link--pink">Манікюр</a>
+					<a href="" class="tags-block__all _icon-heart"></a>
+					<a href="" class="tags-block__link tags-block__link--pink">Педикюр</a>
+					<a href="" class="tags-block__link tags-block__link--blue">Збільшення губ</a>
+					<a href="" class="tags-block__all _icon-eye"></a>
+					<a href="" class="tags-block__link tags-block__link--peach">Нарощування вій</a>
+					<a href="" class="tags-block__link tags-block__link--peach">Аніме нарощування </a>
+					<a href="" class="tags-block__link tags-block__link--violet">Air touch</a>
+					<a href="" class="tags-block__link tags-block__link--orange">Макіяж</a>
+					<a href="" class="tags-block__all _icon-vector"></a>
+					<a href="" class="tags-block__link tags-block__link--pink">Нарощування нігтів</a>
+					<a href="" class="tags-block__link tags-block__link--violet">Мілірування волосся</a>
+					<a href="" class="tags-block__link tags-block__link--black">Антицелюлітний масаж</a>
+					<a href="" class="tags-block__link tags-block__link--blue">Пілінг</a>
+					<a href="" class="tags-block__all _icon-crown"></a>
+					<a href="" class="tags-block__link tags-block__link--blue">Мезотерапія</a>
+					<a href="" class="tags-block__link tags-block__link--blue">Ліфтинг Radiesse</a>
+					<a href="" class="tags-block__link tags-block__link--blue">Ботулінотерапія</a>
+					<a href="" class="tags-block__link tags-block__link--peach">Ламінування вій</a>
+					<a href="" class="tags-block__link tags-block__link--yellow">Ламінування брів</a>
+					<a href="" class="tags-block__all _icon-lines"></a>
+					<a href="" class="tags-block__link tags-block__link--blue">Віскі пеленання STYX</a>
+					<a href="" class="tags-block__link tags-block__link--pink">Френч</a>
+					<a href="" class="tags-block__link tags-block__link--violet">Мілірування волосся</a>
+					<a href="" class="tags-block__link tags-block__link--black">Масаж спини</a>
+					<a href="" class="tags-block__link tags-block__link--yellow">Фарбування брів</a>
+					<a href="" class="tags-block__link tags-block__link--blue">Біоревіталізація</a>
+					<a href="" class="tags-block__link tags-block__link--blue">Ліполітики</a>
+					<a href="" class="tags-block__all _icon-vector-round"></a>
+					<a href="" class="tags-block__link tags-block__link--violet">Укладання волосся</a>
+					<a href="" class="tags-block__link tags-block__link--violet">Стрижка</a>
+					<a href="" class="tags-block__link tags-block__link--black">Віскі пеленання STYX</a>
+					<a href="" class="tags-block__all _icon-cup"></a>
+					<a href="" class="tags-block__link tags-block__link--black">Лімфодренажний масаж </a>
+					<a href="" class="tags-block__link tags-block__link--violet">Фарбування волосся</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/app.min.js?_v=20240719085011"></script>
 </body>
 
 </html>
