@@ -5040,6 +5040,9 @@ body::after {
 .regist__label {
   padding-bottom: 10px
 }
+.regist__link:hover {
+  opacity: .6
+}
 .regist__icon {
   display: flex;
   align-items: baseline;
