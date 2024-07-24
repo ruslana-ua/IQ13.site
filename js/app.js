@@ -8754,7 +8754,6 @@
                 observer: true,
                 observeParents: true,
                 speed: 800,
-                loop: true,
                 freeMode: {
                     enabled: true,
                     sticky: false,
@@ -8793,6 +8792,80 @@
                     }
                 },
                 on: {}
+            });
+            if (document.querySelector(".block-promotions__slider")) new swiper_core_Swiper(".block-promotions__slider", {
+                modules: [ Navigation, EffectCoverflow ],
+                observer: true,
+                observeParents: true,
+                speed: 800,
+                loop: true,
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: "auto",
+                spaceBetween: 0,
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: -80,
+                    depth: 150,
+                    scale: .92,
+                    modifier: 1,
+                    slideShadows: false
+                },
+                navigation: {
+                    prevEl: ".swiper-button-prev",
+                    nextEl: ".swiper-button-next"
+                },
+                breakpoints: {
+                    0: {
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: -10,
+                            depth: 150,
+                            scale: .88,
+                            modifier: 1,
+                            slideShadows: false
+                        }
+                    },
+                    768: {
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: -76,
+                            depth: 150,
+                            scale: .99,
+                            modifier: 1,
+                            slideShadows: false
+                        }
+                    },
+                    992: {
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: -80,
+                            depth: 150,
+                            scale: .88,
+                            modifier: 1,
+                            slideShadows: false
+                        }
+                    }
+                },
+                on: {
+                    init: function(swiper) {
+                        const allSlides = document.querySelector(".fraction__all--promotions");
+                        const allSlidesItems = document.querySelectorAll(".block-promotions__slide:not(.swiper-slide-duplicate)");
+                        const totalSlides = allSlidesItems.length;
+                        allSlides.innerHTML = totalSlides < 10 ? "0" + totalSlides : totalSlides;
+                    },
+                    slideChange: function(swiper) {
+                        const currentSlide = document.querySelector(".fraction__current--promotions");
+                        const currentIndex = swiper.realIndex + 1;
+                        currentSlide.innerHTML = currentIndex < 10 ? "0" + currentIndex : currentIndex;
+                    },
+                    transitionEnd: function(swiper) {
+                        const currentSlide = document.querySelector(".fraction__current--promotions");
+                        const currentIndex = swiper.realIndex + 1;
+                        currentSlide.innerHTML = currentIndex < 10 ? "0" + currentIndex : currentIndex;
+                    }
+                }
             });
         }
         window.addEventListener("DOMContentLoaded", (function(e) {
@@ -10117,6 +10190,14 @@
         document.addEventListener("DOMContentLoaded", (function() {
             var pageServicesElement = document.querySelector(".menu-dark");
             if (pageServicesElement) document.documentElement.classList.add("dark-menu");
+        }));
+        document.addEventListener("DOMContentLoaded", (function() {
+            var pageServicesElement = document.querySelector(".menu-white");
+            if (pageServicesElement) document.documentElement.classList.add("white-menu");
+        }));
+        document.addEventListener("DOMContentLoaded", (function() {
+            var pageServicesElement = document.querySelector(".button-white");
+            if (pageServicesElement) document.documentElement.classList.add("button-white");
         }));
         window["FLS"] = false;
         isWebp();
