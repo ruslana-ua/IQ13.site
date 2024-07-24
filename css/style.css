@@ -5374,6 +5374,9 @@ body::after {
   background-color: #ecf9ff;
   padding: 160px 0 40px 0
 }
+.gallery-mod {
+  padding: 160px 0 40px 0
+}
 .gallery__top .top__title {
   max-width: 607px;
   margin: 0 auto
@@ -7419,6 +7422,9 @@ body::after {
   .gallery {
     padding: 120px 0 30px 0
   }
+  .gallery-mod {
+    padding: 272px 0 30px 0
+  }
   .gallery__slider {
     margin-top: 0;
     padding: 10px 0 0 0
@@ -7431,6 +7437,9 @@ body::after {
   }
   .similar-procedures__slider {
     padding-top: 54px
+  }
+  .similar-procedures__slide .services-contacts {
+    min-height: 100%
   }
   .page-promotions {
     padding: 54px 0 60px 0
@@ -8900,6 +8909,9 @@ body::after {
   .gallery {
     padding: 64px 0 30px 0
   }
+  .gallery-mod {
+    padding: 182px 0 30px 0
+  }
   .gallery__top .top__title {
     font-size: 38px;
     line-height: 44px;
@@ -8907,6 +8919,12 @@ body::after {
   }
   .gallery__slider {
     padding: 24px 10px 0 10px
+  }
+  .gallery__slider::before {
+    width: 63%;
+    height: 47%;
+    top: -32px;
+    right: -62px
   }
   .gallery__slide {
     max-width: 100%
