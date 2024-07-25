@@ -8043,7 +8043,8 @@ body::after {
     -webkit-mask: url(../img/bg/mask-21.svg) center top/100% no-repeat
   }
   .price-mod {
-    padding: 120px 0 302px 0
+    padding: 120px 0 302px 0;
+    margin: 0
   }
   .price-mod.price-last {
     padding: 160px 0 64px 0
@@ -9673,7 +9674,8 @@ body::after {
     -webkit-mask: url(../img/bg/mask-22.svg) center top/100% no-repeat
   }
   .price-mod {
-    padding: 80px 0 245px 0
+    padding: 80px 0 245px 0;
+    margin: 0
   }
   .price-mod.blue .price__subtitle::before {
     background-image: url(../img/icons/frame-14.svg)
