@@ -8754,6 +8754,7 @@
                 observer: true,
                 observeParents: true,
                 speed: 800,
+                loop: true,
                 freeMode: {
                     enabled: true,
                     sticky: false,
@@ -9975,6 +9976,32 @@
                 scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
             }));
         }
+        function navScroll() {
+            addWindowScrollEvent = true;
+            const header = document.querySelector(".page-price__fix");
+            const headerShow = header.hasAttribute("data-scroll-show");
+            const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
+            const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
+            let scrollDirection = 0;
+            let timer;
+            document.addEventListener("windowScroll", (function(e) {
+                const scrollTop = window.scrollY;
+                clearTimeout(timer);
+                if (scrollTop >= startPoint) {
+                    !header.classList.contains("_nav-scroll") ? header.classList.add("_nav-scroll") : null;
+                    if (headerShow) {
+                        if (scrollTop > scrollDirection) header.classList.contains("_nav-show") ? header.classList.remove("_nav-show") : null; else !header.classList.contains("_nav-show") ? header.classList.add("_nav-show") : null;
+                        timer = setTimeout((() => {
+                            !header.classList.contains("_nav-show") ? header.classList.add("_nav-show") : null;
+                        }), headerShowTimer);
+                    }
+                } else {
+                    header.classList.contains("_nav-scroll") ? header.classList.remove("_nav-scroll") : null;
+                    if (headerShow) header.classList.contains("_nav-show") ? header.classList.remove("_nav-show") : null;
+                }
+                scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
+            }));
+        }
         setTimeout((() => {
             if (addWindowScrollEvent) {
                 let windowScroll = new Event("windowScroll");
@@ -10190,14 +10217,84 @@
         document.addEventListener("DOMContentLoaded", (function() {
             var pageServicesElement = document.querySelector(".menu-dark");
             if (pageServicesElement) document.documentElement.classList.add("dark-menu");
-        }));
-        document.addEventListener("DOMContentLoaded", (function() {
-            var pageServicesElement = document.querySelector(".menu-white");
+            pageServicesElement = document.querySelector(".menu-white");
             if (pageServicesElement) document.documentElement.classList.add("white-menu");
-        }));
-        document.addEventListener("DOMContentLoaded", (function() {
-            var pageServicesElement = document.querySelector(".button-white");
+            pageServicesElement = document.querySelector(".button-white");
             if (pageServicesElement) document.documentElement.classList.add("button-white");
+            var pagePriceElement = document.querySelector(".page-price");
+            if (pagePriceElement) document.documentElement.classList.add("header-style");
+            if (document.querySelector(".page-price")) {
+                const links = document.querySelectorAll(".anchor");
+                const navbar = document.querySelector(".page-price__nav").classList;
+                const activeClass = "fixed";
+                const productPage = document.querySelector(".page-price__top");
+                const scrollBlocks = document.querySelectorAll(".price");
+                let isSmoothScrolling = false;
+                const handleScroll = () => {
+                    if (!isSmoothScrolling) {
+                        const productPageRect = productPage.getBoundingClientRect();
+                        if (productPageRect.bottom < -70) navbar.add(activeClass); else navbar.remove(activeClass);
+                        setActiveLink();
+                    }
+                };
+                window.addEventListener("scroll", handleScroll);
+                const getClosestScrollBlock = () => {
+                    let closestBlock = null;
+                    let closestDistance = 1 / 0;
+                    scrollBlocks.forEach((block => {
+                        const distance = Math.abs(block.getBoundingClientRect().top);
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestBlock = block;
+                        }
+                    }));
+                    return closestBlock;
+                };
+                const setActiveLink = () => {
+                    const closestBlock = getClosestScrollBlock();
+                    if (!closestBlock) return;
+                    const targetId = "#" + closestBlock.id;
+                    links.forEach((link => {
+                        const linkHref = link.getAttribute("href");
+                        if (linkHref === targetId) link.classList.add("active"); else link.classList.remove("active");
+                    }));
+                };
+                const observerOptions = {
+                    root: null,
+                    rootMargin: "0px",
+                    threshold: .5
+                };
+                const observerCallback = entries => {
+                    entries.forEach((entry => {
+                        if (entry.isIntersecting) setActiveLink();
+                    }));
+                };
+                const observer = new IntersectionObserver(observerCallback, observerOptions);
+                scrollBlocks.forEach((block => observer.observe(block)));
+                links.forEach((link => {
+                    link.addEventListener("click", (event => {
+                        event.preventDefault();
+                        isSmoothScrolling = true;
+                        links.forEach((link => link.classList.remove("active")));
+                        link.classList.add("active");
+                        const targetId = link.getAttribute("href").substring(1);
+                        const targetSection = document.getElementById(targetId);
+                        if (targetSection) {
+                            let offset = 0;
+                            const header = document.querySelector("header");
+                            const pagePriceFix = document.querySelector(".page-price__fix");
+                            if (header) offset += header.offsetHeight;
+                            if (pagePriceFix) offset += pagePriceFix.offsetHeight;
+                            window.scrollTo({
+                                top: targetSection.offsetTop - offset,
+                                behavior: "smooth"
+                            });
+                            isSmoothScrolling = false;
+                        }
+                    }));
+                }));
+                setActiveLink();
+            }
         }));
         window["FLS"] = false;
         isWebp();
@@ -10209,5 +10306,6 @@
         });
         formSubmit();
         headerScroll();
+        navScroll();
     })();
 })();
