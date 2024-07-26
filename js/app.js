@@ -9979,28 +9979,30 @@
         function navScroll() {
             addWindowScrollEvent = true;
             const header = document.querySelector(".page-price__fix");
-            const headerShow = header.hasAttribute("data-scroll-show");
-            const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
-            const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
-            let scrollDirection = 0;
-            let timer;
-            document.addEventListener("windowScroll", (function(e) {
-                const scrollTop = window.scrollY;
-                clearTimeout(timer);
-                if (scrollTop >= startPoint) {
-                    !header.classList.contains("_nav-scroll") ? header.classList.add("_nav-scroll") : null;
-                    if (headerShow) {
-                        if (scrollTop > scrollDirection) header.classList.contains("_nav-show") ? header.classList.remove("_nav-show") : null; else !header.classList.contains("_nav-show") ? header.classList.add("_nav-show") : null;
-                        timer = setTimeout((() => {
-                            !header.classList.contains("_nav-show") ? header.classList.add("_nav-show") : null;
-                        }), headerShowTimer);
+            if (header) {
+                const headerShow = header.hasAttribute("data-scroll-show");
+                const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
+                const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
+                let scrollDirection = 0;
+                let timer;
+                document.addEventListener("windowScroll", (function(e) {
+                    const scrollTop = window.scrollY;
+                    clearTimeout(timer);
+                    if (scrollTop >= startPoint) {
+                        !header.classList.contains("_nav-scroll") ? header.classList.add("_nav-scroll") : null;
+                        if (headerShow) {
+                            if (scrollTop > scrollDirection) header.classList.contains("_nav-show") ? header.classList.remove("_nav-show") : null; else !header.classList.contains("_nav-show") ? header.classList.add("_nav-show") : null;
+                            timer = setTimeout((() => {
+                                !header.classList.contains("_nav-show") ? header.classList.add("_nav-show") : null;
+                            }), headerShowTimer);
+                        }
+                    } else {
+                        header.classList.contains("_nav-scroll") ? header.classList.remove("_nav-scroll") : null;
+                        if (headerShow) header.classList.contains("_nav-show") ? header.classList.remove("_nav-show") : null;
                     }
-                } else {
-                    header.classList.contains("_nav-scroll") ? header.classList.remove("_nav-scroll") : null;
-                    if (headerShow) header.classList.contains("_nav-show") ? header.classList.remove("_nav-show") : null;
-                }
-                scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
-            }));
+                    scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
+                }));
+            }
         }
         setTimeout((() => {
             if (addWindowScrollEvent) {
