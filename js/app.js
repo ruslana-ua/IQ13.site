@@ -8909,6 +8909,46 @@
                 },
                 on: {}
             });
+            if (document.querySelector(".teachers-training__slider")) new swiper_core_Swiper(".teachers-training__slider", {
+                modules: [ Navigation, Mousewheel, freeMode ],
+                observer: true,
+                observeParents: true,
+                speed: 800,
+                freeMode: {
+                    enabled: true,
+                    sticky: false,
+                    momentumBounce: false
+                },
+                mousewheel: {
+                    enabled: true,
+                    sensitivity: .3,
+                    forceToAxis: true
+                },
+                navigation: {
+                    prevEl: ".swiper-button-prev",
+                    nextEl: ".swiper-button-next"
+                },
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1.07,
+                        spaceBetween: 13,
+                        freeMode: {
+                            enabled: true,
+                            sticky: true,
+                            momentumBounce: false
+                        }
+                    },
+                    768: {
+                        slidesPerView: 1.75,
+                        spaceBetween: 16
+                    },
+                    992: {
+                        slidesPerView: 2.14,
+                        spaceBetween: 16
+                    }
+                },
+                on: {}
+            });
         }
         window.addEventListener("DOMContentLoaded", (function(e) {
             initSliders();
@@ -10045,6 +10085,36 @@
                 }));
             }
         }
+        function asideScroll() {
+            if (window.matchMedia("(min-width: 991.98px)").matches) {
+                addWindowScrollEvent = true;
+                const header = document.querySelector(".article__side--wrap");
+                if (header) {
+                    const headerShow = header.hasAttribute("data-scroll-show");
+                    const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
+                    const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
+                    let scrollDirection = 0;
+                    let timer;
+                    document.addEventListener("windowScroll", (function(e) {
+                        const scrollTop = window.scrollY;
+                        clearTimeout(timer);
+                        if (scrollTop >= startPoint) {
+                            !header.classList.contains("_aside-scroll") ? header.classList.add("_aside-scroll") : null;
+                            if (headerShow) {
+                                if (scrollTop > scrollDirection) header.classList.contains("_aside-show") ? header.classList.remove("_aside-show") : null; else !header.classList.contains("_header-show") ? header.classList.add("_aside-show") : null;
+                                timer = setTimeout((() => {
+                                    !header.classList.contains("_aside-show") ? header.classList.add("_aside-show") : null;
+                                }), headerShowTimer);
+                            }
+                        } else {
+                            header.classList.contains("_aside-scroll") ? header.classList.remove("_aside-scroll") : null;
+                            if (headerShow) header.classList.contains("_aside-show") ? header.classList.remove("_aside-show") : null;
+                        }
+                        scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
+                    }));
+                }
+            }
+        }
         setTimeout((() => {
             if (addWindowScrollEvent) {
                 let windowScroll = new Event("windowScroll");
@@ -10339,7 +10409,7 @@
                 }));
                 setActiveLink();
             }
-            if (document.querySelector(".article")) setTimeout((function() {
+            if (document.querySelector(".article__side--wrap")) setTimeout((function() {
                 const anchors = document.querySelectorAll('.article__link[href^="#"]');
                 const header = document.querySelector("header").offsetHeight;
                 for (let i = 0; i < anchors.length; i++) anchors[i].addEventListener("click", (e => {
@@ -10354,6 +10424,22 @@
                 }));
             }), 250);
         }));
+        const vacancieBlock = document.querySelectorAll(".vacancie-block");
+        if (vacancieBlock) {
+            function moveButtons() {
+                const items = document.querySelectorAll(".vacancie-block__item");
+                items.forEach((item => {
+                    const button = item.querySelector(".vacancie-block__link--btn-pink");
+                    const wrap = item.querySelector(".vacancie-block__wrap");
+                    if (window.innerWidth <= 991.98) {
+                        if (button && button.parentNode !== item) item.appendChild(button);
+                    } else if (button && button.parentNode !== wrap) wrap.appendChild(button);
+                }));
+            }
+            moveButtons();
+            window.addEventListener("resize", moveButtons);
+            window.addEventListener("load", moveButtons);
+        }
         window["FLS"] = false;
         isWebp();
         menuInit();
@@ -10365,5 +10451,6 @@
         formSubmit();
         headerScroll();
         navScroll();
+        asideScroll();
     })();
 })();
