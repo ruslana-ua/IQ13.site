@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20240808193247">
+	<link rel="stylesheet" href="css/style.min.css?_v=20240809130753">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -293,7 +293,7 @@
 							<div class="top__subtitle top__subtitle--mod subtitle-xs">Відгуки</div>
 							<div data-watch class="top__title h2 anim">Про нас кажуть</div>
 							<div class="top__row">
-								<a href="" class="top__link--btn-pink _icon-arrow-up">
+								<a href="" data-popup="#popup-reviews" class="top__link--btn-pink _icon-arrow-up">
 									<span>Залишити відгук</span>
 									<div class="btn__bg">
 										<svg width="197" height="76" viewBox="0 0 197 76" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -501,41 +501,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</section>
-			<section class="nav-reviews">
-				<div class="nav-reviews__container">
-					<div class="nav-reviews__bg block-services__bg"></div>
-					<div class="page-promotions__nav">
-						<ul class="nav-reviews__pagination pagination pagination-mod text-m">
-							<a href="" class="pagination__button pagination__button--prev _icon-arrow-up"></a>
-							<li class="pagination__list">
-								<a href="" class="pagination__link active">1</a>
-							</li>
-							<li class="pagination__list">
-								<a href="" class="pagination__link">2</a>
-							</li>
-							<li class="pagination__list">
-								<a href="" class="pagination__link">3</a>
-							</li>
-							<li class="pagination__list">
-								<div class="pagination__link">...</div>
-							</li>
-							<li class="pagination__list">
-								<a href="" class="pagination__link">5</a>
-							</li>
-							<a href="" class="pagination__button pagination__button--next _icon-arrow-up"></a>
-						</ul>
-						<button type="button" class="nav-reviews__link--btn-pink _icon-arrow-up">
-							<span>завантажити ще</span>
-							<div class="btn__bg">
-								<svg width="197" height="76" viewBox="0 0 197 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M177.643 55.3254C145.237 72.9491 106.879 73.1713 70.9389 73.1324C59.0098 72.1274 47.1729 70.4631 35.7148 67.5049C22.4916 64.091 6.20739 57.0264 1.6441 42.3651C-3.79414 24.8927 26.6886 14.3602 37.3277 10.459C65.8806 -0.0110283 100.232 -0.584972 130.014 2.96388C144.558 4.69697 159.229 7.8463 172.804 13.634C180.484 16.9083 189.934 21.2738 194.224 29.0926C201.02 41.4779 186.753 50.3708 177.643 55.3254Z"></path>
-									<path d="M63.9391 73.1262C101.849 73.1262 143.124 74.0987 177.643 55.3254C186.753 50.3708 201.02 41.4779 194.224 29.0926C189.934 21.2738 180.484 16.9083 172.804 13.634C159.229 7.8463 144.558 4.69697 130.014 2.96388C100.232 -0.584972 65.8806 -0.0110283 37.3277 10.459C26.6886 14.3602 -3.79414 24.8927 1.6441 42.3651C6.20739 57.0264 22.4916 64.091 35.7148 67.5049C60.9386 74.0171 87.9985 74.2588 113.836 75" stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
-								</svg>
-							</div>
-						</button>
 					</div>
 				</div>
 			</section>
@@ -1276,7 +1241,114 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20240808193247"></script>
+	<div id="popup-reviews" aria-hidden="true" class="popup popup-search">
+		<div class="popup-search__wrapper">
+			<div class="popup__content popup-search__content popup__content-reviews">
+				<button data-close="" type="button" class="popup-search__close _icon-close"></button>
+				<div class="popup__reviews reviews-popup">
+					<div class="reviews-popup__pic">
+						<div class="reviews-popup__bg">
+							<div class="reviews-popup__wrap">
+								<div class="reviews-popup__image--top lazy_image">
+									<img data-src="img/icons/vector-38.svg" alt="">
+								</div>
+								<div class="reviews-popup__image--bottom lazy_image">
+									<img data-src="img/icons/vector-39.svg" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="reviews-popup__info">
+						<form action="" class="reviews-popup__form form">
+							<div class="form__title h4">Залишити відгук</div>
+							<div class="form__reviews reviews-form">
+								<div class="reviews-form__text text-m text-mob">Ваша оцінка*</div>
+								<div class="reviews-form__star-rating star-rating">
+									<input type="radio" name="rating" class="star-rating__input" id="star-rating-5" value="5">
+									<label class="star-rating__ico _icon-star" for="star-rating-5" title="5 out of 5 stars"></label>
+									<input type="radio" name="rating" class="star-rating__input" id="star-rating-4" value="4">
+									<label class="star-rating__ico _icon-star" for="star-rating-4" title="4 out of 5 stars"></label>
+									<input type="radio" name="rating" class="star-rating__input" id="star-rating-3" value="3">
+									<label class="star-rating__ico _icon-star" for="star-rating-3" title="3 out of 5 stars"></label>
+									<input type="radio" name="rating" class="star-rating__input" id="star-rating-2" value="2">
+									<label class="star-rating__ico _icon-star" for="star-rating-2" title="2 out of 5 stars"></label>
+									<input type="radio" name="rating" data-error="Поле є обовʼязковим для заповнення" data-required data-validate class="star-rating__input" id="star-rating-1" value="1">
+									<label class="star-rating__ico _icon-star" for="star-rating-1" title="1 out of 5 stars"></label>
+								</div>
+							</div>
+							<div data-simplebar='rtl' class="form__bar">
+								<div class="form__radio--text text-m text-mob">Послуги що були надані*</div>
+								<div class="form__row">
+									<div class="form__radio">
+										<input checked id="category-1" type="radio" value="1" name="category" class="form__radio--input">
+										<label for="category-1" class="form__radio--label violet">Hair</label>
+									</div>
+									<div class="form__radio">
+										<input id="category-2" type="radio" value="2" name="category" class="form__radio--input">
+										<label for="category-2" class="form__radio--label orange">Make Up</label>
+									</div>
+									<div class="form__radio">
+										<input id="category-3" type="radio" value="3" name="category" class="form__radio--input">
+										<label for="category-3" class="form__radio--label dark">Massage</label>
+									</div>
+									<div class="form__radio">
+										<input id="category-4" type="radio" value="4" name="category" class="form__radio--input">
+										<label for="category-4" class="form__radio--label peach">Lashes</label>
+									</div>
+									<div class="form__radio">
+										<input id="category-5" type="radio" value="1" name="category" class="form__radio--input">
+										<label for="category-5" class="form__radio--label yellow">Brows</label>
+									</div>
+									<div class="form__radio">
+										<input id="category-6" type="radio" value="2" name="category" class="form__radio--input">
+										<label for="category-6" class="form__radio--label blue">Cosmetology</label>
+									</div>
+									<div class="form__radio">
+										<input id="category-7" type="radio" value="3" name="category" class="form__radio--input">
+										<label for="category-7" class="form__radio--label pink">Nails</label>
+									</div>
+								</div>
+							</div>
+							<div class="form__main">
+								<div class="form__item">
+									<input data-error="Поле є обовʼязковим для заповнення" data-required="name" data-validate name="name" type="text" placeholder="Імʼя*" class="form__input">
+								</div>
+								<div class="form__item">
+									<input data-error="Поле є обовʼязковим для заповнення" data-required="phone" data-validate name="tel" type="tel" placeholder="+38 (___) __ __ ___*" class="form__input phone-mask">
+								</div>
+								<div class="form__item">
+									<textarea data-error="Поле є обовʼязковим для заповнення" data-required="comment" data-validate name="comment" placeholder="Ваш відгук*" class="form__input form__textarea"></textarea>
+								</div>
+							</div>
+							<div class="form__bottom">
+								<div class="form__upload upload-form">
+									<div class="upload-form__wrapper">
+										<input type="file" name="files[]" id="files-upload" accept=.webp.webp.webp" multiple class="upload-form__input">
+										<label for="files-upload" class="upload-form__label subtitle-xs _icon-clip">Додати фотографії</label>
+										<div class="upload-form__error upload-form__error--file">Збій завантаження фото. Повторіть спробу.</div>
+										<div class="upload-form__error upload-form__error--limit">Максимальна кількість фото - 3</div>
+										<div class="upload-form__body upload-wrapper">
+											<div class="upload-wrapper__main"></div>
+										</div>
+									</div>
+								</div>
+								<button type="submit" data-da=".reviews-popup__form,767.98,6" class="form__link--btn-pink _icon-arrow-up">
+									<span>Відправити</span>
+									<div class="btn__bg">
+										<svg width="197" height="76" viewBox="0 0 197 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M177.643 55.3254C145.237 72.9491 106.879 73.1713 70.9389 73.1324C59.0098 72.1274 47.1729 70.4631 35.7148 67.5049C22.4916 64.091 6.20739 57.0264 1.6441 42.3651C-3.79414 24.8927 26.6886 14.3602 37.3277 10.459C65.8806 -0.0110283 100.232 -0.584972 130.014 2.96388C144.558 4.69697 159.229 7.8463 172.804 13.634C180.484 16.9083 189.934 21.2738 194.224 29.0926C201.02 41.4779 186.753 50.3708 177.643 55.3254Z"></path>
+											<path d="M63.9391 73.1262C101.849 73.1262 143.124 74.0987 177.643 55.3254C186.753 50.3708 201.02 41.4779 194.224 29.0926C189.934 21.2738 180.484 16.9083 172.804 13.634C159.229 7.8463 144.558 4.69697 130.014 2.96388C100.232 -0.584972 65.8806 -0.0110283 37.3277 10.459C26.6886 14.3602 -3.79414 24.8927 1.6441 42.3651C6.20739 57.0264 22.4916 64.091 35.7148 67.5049C60.9386 74.0171 87.9985 74.2588 113.836 75" stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
+										</svg>
+									</div>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/app.min.js?_v=20240809130753"></script>
 </body>
 
 </html>

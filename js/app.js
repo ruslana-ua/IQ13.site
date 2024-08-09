@@ -8625,6 +8625,11 @@
                         const allSlidesItems = document.querySelectorAll(".interior__slide:not(.swiper-slide-duplicate)");
                         const totalSlides = allSlidesItems.length;
                         allSlides.innerHTML = totalSlides < 10 ? "0" + totalSlides : totalSlides;
+                        allSlidesItems.forEach((slide => {
+                            slide.addEventListener("click", (function() {
+                                if (slide.classList.contains("swiper-slide-next")) swiper.slideNext(); else if (slide.classList.contains("swiper-slide-prev")) swiper.slidePrev();
+                            }));
+                        }));
                     },
                     slideChange: function(swiper) {
                         const currentSlide = document.querySelector(".fraction__current--interior");
@@ -8663,6 +8668,11 @@
                                 const allSlidesItems = document.querySelectorAll(".reviews__slide:not(.swiper-slide-duplicate)");
                                 const totalSlides = allSlidesItems.length;
                                 allSlides.innerHTML = totalSlides < 10 ? "0" + totalSlides : totalSlides;
+                                allSlidesItems.forEach((slide => {
+                                    slide.addEventListener("click", (function() {
+                                        if (slide.classList.contains("swiper-slide-next")) swiper.slideNext(); else if (slide.classList.contains("swiper-slide-prev")) swiper.slidePrev();
+                                    }));
+                                }));
                             },
                             slideChange: function(swiper) {
                                 const currentSlide = document.querySelector(".fraction__current--reviews");
@@ -8746,6 +8756,19 @@
                             modifier: 1,
                             slideShadows: false
                         }
+                    }
+                },
+                on: {
+                    init: function(swiper) {
+                        const slides = document.querySelectorAll(".gallery__slide");
+                        slides.forEach((slide => {
+                            slide.addEventListener("click", (function() {
+                                const slideIndex = Array.from(slides).indexOf(slide);
+                                const isNext = slideIndex === swiper.activeIndex + 1;
+                                const isPrev = slideIndex === swiper.activeIndex - 1;
+                                if (isNext) swiper.slideNext(); else if (isPrev) swiper.slidePrev();
+                            }));
+                        }));
                     }
                 }
             });
@@ -8855,6 +8878,11 @@
                         const allSlidesItems = document.querySelectorAll(".block-promotions__slide:not(.swiper-slide-duplicate)");
                         const totalSlides = allSlidesItems.length;
                         allSlides.innerHTML = totalSlides < 10 ? "0" + totalSlides : totalSlides;
+                        allSlidesItems.forEach((slide => {
+                            slide.addEventListener("click", (function() {
+                                if (slide.classList.contains("swiper-slide-next")) swiper.slideNext(); else if (slide.classList.contains("swiper-slide-prev")) swiper.slidePrev();
+                            }));
+                        }));
                     },
                     slideChange: function(swiper) {
                         const currentSlide = document.querySelector(".fraction__current--promotions");
@@ -10440,6 +10468,80 @@
             window.addEventListener("resize", moveButtons);
             window.addEventListener("load", moveButtons);
         }
+        window.addEventListener("load", (() => {
+            const formLabelUploadInput = document.querySelector(".upload-form__input");
+            const formLabelUpload = document.querySelector(".upload-form__label");
+            const uploadWrapper = document.querySelector(".upload-wrapper__main");
+            const errorFileDiv = document.querySelector(".upload-form__error--file");
+            const errorLimitDiv = document.querySelector(".upload-form__error--limit");
+            if (formLabelUploadInput) {
+                formLabelUpload.addEventListener("dragover", (e => {
+                    e.preventDefault();
+                }));
+                formLabelUpload.addEventListener("drop", (e => {
+                    e.preventDefault();
+                    const files = e.dataTransfer.files;
+                    handleFiles(files);
+                }));
+                formLabelUploadInput.addEventListener("change", (e => {
+                    const files = e.target.files;
+                    handleFiles(files);
+                }));
+                const handleFiles = files => {
+                    const currentFilesCount = document.querySelectorAll(".upload-wrapper__box").length;
+                    const remainingSlots = 3 - currentFilesCount;
+                    const limitedFiles = [ ...files ].slice(0, remainingSlots);
+                    if (currentFilesCount + files.length > 3) displayError("limit"); else removeError("limit");
+                    for (let i = 0; i < limitedFiles.length; i++) {
+                        const fileType = limitedFiles[i].name.split(".").pop().toLowerCase();
+                        if (!isSupported(fileType)) {
+                            displayError("file");
+                            break;
+                        } else {
+                            fileshow(limitedFiles[i]);
+                            removeError("file");
+                        }
+                    }
+                };
+                const isSupported = fileType => {
+                    const allowedTypes = [ "jpg", "jpeg", "png" ];
+                    return allowedTypes.includes(fileType);
+                };
+                const fileshow = file => {
+                    const uploadWrapperBoxCount = document.querySelectorAll(".upload-wrapper__box").length;
+                    if (uploadWrapperBoxCount < 3) {
+                        const uploadWrapperBox = document.createElement("div");
+                        uploadWrapperBox.classList.add("upload-wrapper__box");
+                        const uploadWrapperFile = document.createElement("div");
+                        uploadWrapperFile.classList.add("upload-wrapper__image");
+                        const uploadWrapperDel = document.createElement("button");
+                        uploadWrapperDel.classList.add("upload-wrapper__del");
+                        uploadWrapper.append(uploadWrapperBox);
+                        uploadWrapperBox.append(uploadWrapperFile);
+                        uploadWrapperBox.append(uploadWrapperDel);
+                        const reader = new FileReader;
+                        reader.onload = e => {
+                            const img = document.createElement("img");
+                            img.src = e.target.result;
+                            img.alt = file.name;
+                            uploadWrapperFile.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                        uploadWrapperDel.addEventListener("click", (e => {
+                            e.stopPropagation();
+                            uploadWrapper.removeChild(uploadWrapperBox);
+                            handleFiles([]);
+                        }));
+                    } else displayError("limit");
+                };
+                const displayError = type => {
+                    if (type === "limit") errorLimitDiv.style.display = "flex"; else if (type === "file") errorFileDiv.style.display = "flex";
+                };
+                const removeError = type => {
+                    if (type === "limit") errorLimitDiv.style.display = "none"; else if (type === "file") errorFileDiv.style.display = "none";
+                };
+            }
+        }));
         window["FLS"] = false;
         isWebp();
         menuInit();
