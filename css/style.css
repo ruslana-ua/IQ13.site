@@ -1948,6 +1948,17 @@ body::after {
   mask: url(../img/bg/mask-20.svg) center bottom/100% no-repeat;
   -webkit-mask: url(../img/bg/mask-20.svg) center bottom/100% no-repeat
 }
+.anim {
+  opacity: 0;
+  -webkit-transform: translate(0,50%);
+  transform: translate(0,50%)
+}
+.anim._watcher-view {
+  transition: all 1.5s .2s;
+  opacity: 1;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0)
+}
 .header {
   padding: 16px 0;
   position: fixed;
@@ -4031,7 +4042,8 @@ body::after {
   line-height: 15px
 }
 .block-services__top .top__title {
-  position: relative
+  position: relative;
+  z-index: -1
 }
 .block-services__top .top__title::after,
 .block-services__top .top__title::before {
