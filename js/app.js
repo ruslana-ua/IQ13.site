@@ -10470,26 +10470,21 @@
         }
         window.addEventListener("load", (() => {
             const formLabelUploadInput = document.querySelector(".upload-form__input");
-            document.querySelector(".upload-form__label");
             const uploadWrapper = document.querySelector(".upload-wrapper__main");
             const errorFileDiv = document.querySelector(".upload-form__error--file");
             const errorLimitDiv = document.querySelector(".upload-form__error--limit");
             if (formLabelUploadInput) {
-                console.log("File input found");
                 formLabelUploadInput.addEventListener("change", (e => {
-                    console.log("File input changed");
                     const files = e.target.files;
                     handleFiles(files);
                 }));
                 const handleFiles = files => {
-                    console.log("Handling files", files);
                     const currentFilesCount = document.querySelectorAll(".upload-wrapper__box").length;
                     const remainingSlots = 3 - currentFilesCount;
                     const limitedFiles = [ ...files ].slice(0, remainingSlots);
                     if (currentFilesCount + files.length > 3) displayError("limit"); else removeError("limit");
                     for (let i = 0; i < limitedFiles.length; i++) {
                         const fileType = limitedFiles[i].name.split(".").pop().toLowerCase();
-                        console.log("File type:", fileType);
                         if (!isSupported(fileType)) {
                             displayError("file");
                             break;
@@ -10504,7 +10499,6 @@
                     return allowedTypes.includes(fileType);
                 };
                 const fileshow = file => {
-                    console.log("Showing file", file);
                     const uploadWrapperBoxCount = document.querySelectorAll(".upload-wrapper__box").length;
                     if (uploadWrapperBoxCount < 3) {
                         const uploadWrapperBox = document.createElement("div");
@@ -10537,7 +10531,7 @@
                 const removeError = type => {
                     if (type === "limit") errorLimitDiv.style.display = "none"; else if (type === "file") errorFileDiv.style.display = "none";
                 };
-            } else console.log("File input not found");
+            }
         }));
         window["FLS"] = false;
         isWebp();
